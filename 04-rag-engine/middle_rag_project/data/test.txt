@@ -1,0 +1,5 @@
+FastAPI is a modern Python web framework for building APIs.
+It is fast, easy to use, and supports async out of the box.
+Docker is a platform for running applications in containers.
+Ollama allows running large language models locally.
+RAG stands for Retrieval-Augmented Generation.

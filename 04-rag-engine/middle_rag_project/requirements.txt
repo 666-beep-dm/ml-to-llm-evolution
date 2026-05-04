@@ -1,0 +1,22 @@
+# Core LangChain
+langchain==0.3.25
+langchain-core==0.3.60
+langchain-community==0.3.24
+langchain-huggingface==0.1.2
+langchain-text-splitters==0.3.8
+
+# LLM providers (install both; only the selected one is used at runtime)
+langchain-openai==0.3.16
+langchain-ollama==0.3.3
+
+# Embeddings
+sentence-transformers==3.4.1
+
+# Vector store
+faiss-cpu==1.11.0
+
+# Config
+pydantic-settings==2.9.1
+
+# Utilities
+numpy==2.2.4

@@ -1,0 +1,70 @@
+services:
+
+  # ── RAG application ──────────────────────────────────────────────────────────
+  rag:
+    build: .
+    image: middle-rag:latest
+    container_name: middle_rag_app
+
+    # Interactive terminal — required for input()
+    stdin_open: true
+    tty: true
+
+    env_file: .env
+
+    volumes:
+      # Documents to index (put your .txt / .json files here)
+      - ./data:/app/data
+
+      # Persisted FAISS index — survives container restarts
+      - faiss_index:/app/faiss_index
+
+      # HuggingFace model cache — downloaded only once
+      - hf_cache:/hf_cache
+
+    depends_on:
+      ollama:
+        condition: service_healthy
+
+    networks:
+      - rag_net
+
+  # ── Ollama LLM server ─────────────────────────────────────────────────────────
+  # Remove this service when using LLM_PROVIDER=openai
+  ollama:
+    image: ollama/ollama:latest
+    container_name: middle_rag_ollama
+
+    # GPU support — remove the `deploy` block if you have no GPU
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+    volumes:
+      - ollama_models:/root/.ollama
+
+    ports:
+      - "11434:11434"
+
+    healthcheck:
+      test:  ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+
+    networks:
+      - rag_net
+
+volumes:
+  faiss_index:
+  hf_cache:
+  ollama_models:
+
+networks:
+  rag_net:
+    driver: bridge

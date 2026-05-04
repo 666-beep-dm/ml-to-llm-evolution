@@ -1,0 +1,17 @@
+[
+  {
+    "text": "Docker is an open platform for developing, shipping, and running applications inside lightweight containers. Containers isolate the application from the host infrastructure, ensuring consistent behaviour across environments."
+  },
+  {
+    "text": "A Dockerfile is a text file with instructions to build a Docker image. Multi-stage builds allow separating the build environment from the runtime environment, resulting in smaller final images."
+  },
+  {
+    "text": "Docker Compose is a tool for defining and running multi-container Docker applications. A docker-compose.yml file describes services, networks, and volumes in a declarative YAML format."
+  },
+  {
+    "text": "FAISS (Facebook AI Similarity Search) is a library for efficient similarity search and clustering of dense vectors. It is widely used as the vector store backend in RAG pipelines."
+  },
+  {
+    "text": "Retrieval-Augmented Generation (RAG) combines a retrieval step — finding relevant documents from a vector store — with a generation step — passing those documents as context to a large language model to produce a grounded answer."
+  }
+]

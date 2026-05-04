@@ -1,0 +1,14 @@
+FastAPI is a modern, high-performance web framework for building APIs with Python 3.8+.
+It is based on standard Python type hints and uses Pydantic for data validation.
+
+FastAPI automatically generates interactive API documentation (Swagger UI and ReDoc)
+from your code, making it easy to explore and test endpoints.
+
+Key features of FastAPI:
+- Asynchronous support with async/await out of the box.
+- Dependency injection system for clean, testable code.
+- OpenAPI and JSON Schema standards compliance.
+- Very high performance, comparable to NodeJS and Go, thanks to Starlette and Pydantic.
+
+FastAPI is widely used for building microservices, ML model serving endpoints,
+and production REST APIs.

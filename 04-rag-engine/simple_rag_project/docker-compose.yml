@@ -1,0 +1,16 @@
+services:
+  simple-rag:
+    build: .
+    image: simple-rag:latest
+
+    # Required for interactive input() in the script
+    stdin_open: true
+    tty: true
+
+    # Mount local .hf_cache so the model is downloaded only once
+    volumes:
+      - ./.hf_cache:/hf_cache
+
+    environment:
+      # Override the model name here if needed
+      EMBEDDING_MODEL: all-MiniLM-L6-v2

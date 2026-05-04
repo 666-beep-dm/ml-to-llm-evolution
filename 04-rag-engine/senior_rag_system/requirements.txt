@@ -1,0 +1,26 @@
+# Web framework
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+
+# Config
+pydantic-settings==2.9.1
+
+# Logging
+loguru==0.7.3
+
+# LangChain (chunking only)
+langchain-text-splitters==0.3.8
+
+# Embeddings + Reranker
+sentence-transformers==3.4.1
+
+# Vector store
+chromadb==1.0.5
+
+# Cache
+redis==5.2.1
+numpy==2.2.4
+
+# LLM providers (install both; only the selected one is used at runtime)
+openai==1.78.1
+anthropic==0.52.0
