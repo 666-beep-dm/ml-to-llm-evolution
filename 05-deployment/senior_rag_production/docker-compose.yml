@@ -1,0 +1,73 @@
+version: "3.9"
+
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "20m"
+    max-file: "5"
+
+services:
+  api:
+    build:
+      context: .
+      target: runtime
+    container_name: rag_api
+    ports:
+      - "8000:8000"
+    env_file: .env
+    depends_on:
+      redis:
+        condition: service_healthy
+      vector-db:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+    logging: *default-logging
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: rag_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    logging: *default-logging
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  vector-db:
+    image: chromadb/chroma:0.5.0
+    container_name: rag_chroma
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - PERSIST_DIRECTORY=/chroma/chroma
+      - ANONYMIZED_TELEMETRY=FALSE
+    logging: *default-logging
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/heartbeat')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+volumes:
+  redis_data:
+  chroma_data:
