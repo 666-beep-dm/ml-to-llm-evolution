@@ -1,0 +1,12 @@
+Retrieval-Augmented Generation (RAG) is an AI architecture that combines information
+retrieval with text generation. It was introduced by researchers at Facebook AI (now Meta)
+in a 2020 paper. The core idea is to enhance a language model's responses by retrieving
+relevant documents from an external knowledge base at query time. The process has two
+main steps: retrieval and generation. During retrieval, a query is encoded into a vector
+embedding and compared against a pre-indexed set of document embeddings using similarity
+metrics like cosine similarity. The most relevant document chunks are selected as context.
+During generation, the original question and the retrieved context are combined into a
+prompt that is fed to a large language model (LLM). This approach reduces hallucinations
+because the model has access to factual, grounded information. RAG is especially useful
+for domain-specific applications where the LLM's training data may be outdated or incomplete.
+Popular embedding models include all-MiniLM-L6-v2 from sentence-transformers.

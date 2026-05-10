@@ -1,0 +1,8 @@
+The Transformer architecture, introduced in "Attention Is All You Need" (Vaswani et al., 2017),
+uses self-attention mechanisms to process sequences in parallel rather than recurrently.
+Key components include multi-head self-attention, positional encodings, feed-forward layers,
+and layer normalization. BERT (2018) applied bidirectional transformers to NLP pre-training.
+GPT series models use decoder-only transformers for autoregressive generation.
+Sentence-BERT adapted the architecture to produce semantically meaningful sentence embeddings
+using Siamese networks trained with cosine-similarity objectives. The all-MiniLM-L6-v2 model
+is a distilled, efficient variant producing 384-dimensional embeddings ideal for semantic search.

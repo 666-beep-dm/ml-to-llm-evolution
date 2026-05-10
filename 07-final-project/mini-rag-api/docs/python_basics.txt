@@ -1,0 +1,11 @@
+Python is a high-level, interpreted programming language known for its clear syntax
+and readability. It was created by Guido van Rossum and first released in 1991.
+Python supports multiple programming paradigms including procedural, object-oriented,
+and functional programming. It has a large standard library and a vibrant ecosystem
+of third-party packages available via PyPI. Python is widely used in web development,
+data science, artificial intelligence, automation, and scientific computing.
+Popular frameworks include Django and FastAPI for web development, NumPy and Pandas
+for data analysis, and PyTorch and TensorFlow for machine learning. Python's
+philosophy emphasizes code readability and simplicity, summarized in the Zen of Python.
+The language uses indentation to define code blocks instead of curly braces.
+Python 3 is the current major version, with Python 2 reaching end-of-life in 2020.

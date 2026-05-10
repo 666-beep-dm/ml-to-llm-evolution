@@ -1,0 +1,11 @@
+Docker is an open-source platform for developing, shipping, and running applications
+in containers. Containers are lightweight, standalone, executable packages that include
+everything needed to run an application: code, runtime, system tools, libraries, and settings.
+Docker was first released in 2013 by Solomon Hykes at dotCloud. The core concepts include
+images (read-only templates), containers (running instances of images), and registries
+(storage for images, e.g. Docker Hub). A Dockerfile is a text file with instructions
+to build a Docker image. Docker Compose is a tool for defining and running multi-container
+applications using a YAML file. Key commands include docker build, docker run, docker ps,
+docker stop, and docker-compose up. Containers differ from virtual machines in that they
+share the host OS kernel, making them much more lightweight and fast to start.
+Docker is essential in modern DevOps and CI/CD pipelines.

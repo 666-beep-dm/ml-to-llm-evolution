@@ -1,0 +1,7 @@
+Retrieval-Augmented Generation (RAG) combines information retrieval with language
+model generation. A RAG system indexes documents as vector embeddings. At query
+time it retrieves the most relevant chunks using cosine similarity, then passes
+them as context to an LLM. This reduces hallucinations and allows the model to
+reason over private or up-to-date data not seen during training.
+The two key components are the retriever (e.g. FAISS, ChromaDB) and the generator
+(e.g. GPT-4, Mistral, LLaMA).

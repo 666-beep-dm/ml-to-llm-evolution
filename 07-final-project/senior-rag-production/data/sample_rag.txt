@@ -1,0 +1,9 @@
+Retrieval-Augmented Generation (RAG) is an AI architecture introduced by Facebook AI
+Research in 2020. It enhances language model responses by retrieving relevant documents
+from an external knowledge base at query time. The system has two key components:
+a dense retriever that converts text to vector embeddings and a generative model that
+produces answers conditioned on retrieved context. Two-stage retrieval with reranking
+first retrieves a broad candidate set using approximate nearest-neighbor search,
+then a cross-encoder model precisely scores query-document pairs to select the best
+context. This approach significantly reduces hallucinations and enables grounding
+on private, domain-specific, or real-time data.

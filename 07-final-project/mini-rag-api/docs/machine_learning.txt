@@ -1,0 +1,12 @@
+Machine learning is a subset of artificial intelligence that enables systems to learn
+from data without being explicitly programmed. It was pioneered by researchers like
+Alan Turing, Arthur Samuel, and later Geoffrey Hinton. The three main types are
+supervised learning, unsupervised learning, and reinforcement learning.
+Supervised learning uses labeled training data to learn a mapping from inputs to outputs.
+Common algorithms include linear regression, decision trees, random forests, and
+support vector machines. Deep learning, a subfield of machine learning, uses neural
+networks with many layers to learn hierarchical representations of data.
+Convolutional Neural Networks (CNNs) excel at image recognition tasks.
+Recurrent Neural Networks (RNNs) and Transformers are used for sequential data like text.
+The Transformer architecture, introduced in "Attention Is All You Need" (2017),
+revolutionized natural language processing and is the basis for models like GPT and BERT.

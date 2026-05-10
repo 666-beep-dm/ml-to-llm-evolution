@@ -1,0 +1,6 @@
+Python is a high-level, interpreted programming language first released in 1991
+by Guido van Rossum. It emphasizes readability and simplicity. Python supports
+multiple paradigms: procedural, object-oriented, and functional. Its package
+ecosystem (PyPI) contains over 400,000 libraries. Python 3 is the current
+standard. It is widely used in web development (Django, FastAPI), data science
+(Pandas, NumPy), AI/ML (PyTorch, TensorFlow), and automation scripting.
