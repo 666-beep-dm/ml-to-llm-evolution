@@ -1,0 +1,47 @@
+model:
+  base_model_id: "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+  # alternative: "microsoft/Phi-3-mini-4k-instruct"
+  adapter_output_dir: "models/lora_adapter"
+  merged_output_dir:  "models/merged"
+
+quantization:
+  load_in_4bit: true
+  bnb_4bit_quant_type: "nf4"
+  bnb_4bit_compute_dtype: "float16"
+  bnb_4bit_use_double_quant: true
+
+lora:
+  r: 8
+  lora_alpha: 16
+  target_modules: ["q_proj", "v_proj"]
+  lora_dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+training:
+  data_path: "data/dataset.jsonl"
+  train_split: 0.85
+  seed: 42
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  num_train_epochs: 3
+  learning_rate: 0.0002
+  max_seq_length: 512
+  warmup_ratio: 0.05
+  logging_steps: 10
+  save_steps: 100
+  save_total_limit: 2
+  fp16: true
+  gradient_checkpointing: true
+  optim: "paged_adamw_32bit"
+  lr_scheduler_type: "cosine"
+  eval_strategy: "epoch"
+  load_best_model_at_end: true
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  max_new_tokens: 256
+  temperature: 0.7
+  top_p: 0.9
+  repetition_penalty: 1.1

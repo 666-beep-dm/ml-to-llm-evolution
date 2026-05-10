@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.env
+venv/
+.venv/
+
+# Model outputs (large binaries — commit only adapter configs, not weights)
+output/lora_adapter/*.bin
+output/lora_adapter/*.safetensors
+output/merged_model/
+
+# HuggingFace cache
+~/.cache/huggingface/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

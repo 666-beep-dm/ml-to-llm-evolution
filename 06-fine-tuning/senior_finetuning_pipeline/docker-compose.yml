@@ -1,0 +1,87 @@
+version: "3.8"
+
+x-gpu: &gpu-deploy
+  resources:
+    reservations:
+      devices:
+        - driver: nvidia
+          count: 1
+          capabilities: [gpu]
+
+x-common-env: &common-env
+  PYTHONUNBUFFERED: "1"
+  TOKENIZERS_PARALLELISM: "false"
+  CONFIG_PATH: "configs/training_config.yaml"
+
+services:
+
+  # ── One-shot training container ──────────────────────────────────────────
+  trainer:
+    build:
+      context: .
+      dockerfile: Dockerfile.trainer
+    image: senior_lora_trainer:latest
+    container_name: lora_trainer
+    volumes:
+      - ./models:/workspace/models
+      - ./data:/workspace/data
+      - ./output:/workspace/output
+      - ./logs:/workspace/logs
+      - hf_cache:/root/.cache/huggingface
+    environment:
+      <<: *common-env
+    deploy: *gpu-deploy
+    restart: "no"
+    command: python scripts/train_pipeline.py
+
+  # ── Evaluation (run after trainer) ───────────────────────────────────────
+  evaluator:
+    build:
+      context: .
+      dockerfile: Dockerfile.trainer
+    image: senior_lora_trainer:latest
+    container_name: lora_evaluator
+    volumes:
+      - ./models:/workspace/models
+      - ./data:/workspace/data
+      - ./output:/workspace/output
+      - ./logs:/workspace/logs
+      - hf_cache:/root/.cache/huggingface
+    environment:
+      <<: *common-env
+    deploy: *gpu-deploy
+    restart: "no"
+    profiles: [evaluate]
+    command: python scripts/evaluate_pipeline.py
+
+  # ── Persistent inference API ──────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    image: senior_lora_api:latest
+    container_name: lora_api
+    ports:
+      - "${API_PORT:-8000}:8000"
+    volumes:
+      - ./models:/workspace/models
+      - ./output:/workspace/output
+      - ./logs:/workspace/logs
+      - hf_cache:/root/.cache/huggingface
+    environment:
+      <<: *common-env
+    deploy: *gpu-deploy
+    restart: unless-stopped
+    depends_on:
+      - trainer
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+    profiles: [api]
+    command: python scripts/start_api.py
+
+volumes:
+  hf_cache:

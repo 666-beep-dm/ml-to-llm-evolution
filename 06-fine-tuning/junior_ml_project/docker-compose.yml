@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  train:
+    build: .
+    image: junior_ml_finetune:latest
+    container_name: ml_train
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: python scripts/train.py
+
+  predict:
+    build: .
+    image: junior_ml_finetune:latest
+    container_name: ml_predict
+    volumes:
+      - ./models:/app/models
+    environment:
+      - PYTHONUNBUFFERED=1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    profiles:
+      - predict
+    command: python scripts/predict.py "What is overfitting?"

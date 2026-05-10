@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is machine learning?",
+    "answer": "Machine learning is a method where computers learn from data to make predictions."
+  },
+  {
+    "question": "What is a neural network?",
+    "answer": "A neural network is a system of layers of nodes inspired by the human brain."
+  },
+  {
+    "question": "What is overfitting?",
+    "answer": "Overfitting happens when a model learns training data too well and fails on new data."
+  },
+  {
+    "question": "What is a loss function?",
+    "answer": "A loss function measures how far the model predictions are from the correct answers."
+  },
+  {
+    "question": "What is gradient descent?",
+    "answer": "Gradient descent is an optimization algorithm that minimizes loss by updating weights."
+  },
+  {
+    "question": "What is a learning rate?",
+    "answer": "A learning rate controls how big each weight update step is during training."
+  },
+  {
+    "question": "What is fine-tuning?",
+    "answer": "Fine-tuning is training a pretrained model on a small specific dataset for a new task."
+  },
+  {
+    "question": "What is tokenization?",
+    "answer": "Tokenization splits text into smaller units called tokens that the model can process."
+  },
+  {
+    "question": "What is a transformer?",
+    "answer": "A transformer is a neural network architecture that uses attention to process sequences."
+  },
+  {
+    "question": "What is VRAM?",
+    "answer": "VRAM is video memory on the GPU used to store model weights and activations during training."
+  }
+]

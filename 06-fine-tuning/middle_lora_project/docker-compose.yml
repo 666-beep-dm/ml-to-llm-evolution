@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  train:
+    build: .
+    image: middle_lora_finetune:latest
+    container_name: lora_train
+    volumes:
+      - ./output:/app/output
+      - ./data:/app/data
+      # Cache HuggingFace model downloads between runs
+      - hf_cache:/root/.cache/huggingface
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TOKENIZERS_PARALLELISM=false
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: python scripts/train.py
+
+  evaluate:
+    build: .
+    image: middle_lora_finetune:latest
+    container_name: lora_evaluate
+    volumes:
+      - ./output:/app/output
+      - hf_cache:/root/.cache/huggingface
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TOKENIZERS_PARALLELISM=false
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    profiles:
+      - evaluate
+    command: python scripts/evaluate.py "What is LoRA?"
+
+volumes:
+  hf_cache:
